@@ -1,0 +1,23 @@
+version: '3.1'
+
+services:
+  db:
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_USER: ryanbanco
+      POSTGRES_PASSWORD: abc123
+      POSTGRES_DB: test
+    ports:
+      - "5432:5432"
+    networks:
+      - default
+  backend:
+    image: engemolde:v1
+    build:
+      context: ./backend
+      dockerfile: ./backend/Dockerfile
+    ports:
+      - "3010:3000"
+networks:
+  default:
